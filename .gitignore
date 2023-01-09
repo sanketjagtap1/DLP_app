@@ -1,0 +1,7 @@
+frontend/node_modules
+frontend/.angular/cache/*
+frontend/node_modules/*
+frontend/android/*
+frontend/platforms/*
+frontend/www/*
+frontend/angular/*

@@ -1,0 +1,10 @@
+  <div class="registration container d-flex justify-content-center align-items-center w-100" >
+    <form #loginForm="ngForm" class="bg-light p-4" (ngSubmit)="login(loginForm.value)">
+      <h3 class=" text-center ">Login</h3>
+      <br>
+      <input class="form-control my-2" type="text" ngModel name="email" id="" placeholder="Email">  
+      <input class="form-control my-2" type="password" ngModel name="password" id="" placeholder="Password">  
+      <button class="btn btn-primary text-uppercase w-100 my-4">Sing In</button>
+      <span>New to DLP?<a routerLink="/auth">Sign Up</a></span>
+  </form>
+</div>
