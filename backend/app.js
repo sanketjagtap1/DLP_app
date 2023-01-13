@@ -1,12 +1,11 @@
 // imports
 const express = require('express');
+const cors = require('cors')
 const app = express();
-const authRoute = require('./auth/routes')
-const adminRoute = require('./admin/routes')
-const studentRoute = require('./student/routes')
-const teacherRoute = require('./teacher/routes')
+
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+
 
 
 // database Connection
@@ -23,6 +22,15 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 // Routes Import
+app.use(cors());
+
+
+
+const authRoute = require('./auth/routes')
+const adminRoute = require('./admin/routes')
+const studentRoute = require('./student/routes')
+const teacherRoute = require('./teacher/routes')
+
 app.use('/auth', authRoute);
 app.use('/admin', adminRoute);
 app.use('/student', studentRoute);

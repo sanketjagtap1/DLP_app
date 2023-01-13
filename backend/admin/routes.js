@@ -1,17 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res, next)=>{
-    res.status(200).json({
-        msg: 'This is admin get'
-    })
-})
+const adminController = require('./controller')
 
-router.post('/', (req, res, next)=>{
-    res.status(200).json({
-        msg: 'This is admin post'
-    })
-})
+router.get('/getUserList', adminController.getUserList);
 
 
 module.exports = router;

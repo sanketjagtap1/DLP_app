@@ -1,0 +1,27 @@
+<div class="ion-page" id="main-content" style="z-index: 98;">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons style="z-index: 198;" class="menu-button" slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="title ">Add Teacher</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+
+    <div class="registration container d-flex justify-content-center align-items-center w-100" >
+      <form #addTeacherForm="ngForm" class="bg-light p-4" (ngSubmit)="addTeacher(addTeacherForm.value)">
+        
+        <input class="form-control my-2" type="text" ngModel name="name" id="" placeholder="Name">  
+        <input class="form-control my-2" type="number" ngModel name="mobile" id="" placeholder="Mobile">
+        <input class="form-control my-2" type="email" ngModel name="email" id="" placeholder="Email">  
+        <input class="form-control my-2" type="text" ngModel name="qualification" id="" placeholder="Qualification">
+        <input class="form-control my-2" type="text"  ngModel name="userType" value="John" id="" hidden>
+        <input class="form-control my-2" type="password" ngModel name="password" id="" placeholder="Password">  
+        <button class="btn btn-primary text-uppercase w-100 my-2">Create Account</button>
+        
+    </form>
+  </div>
+
+  </ion-content>
+</div>

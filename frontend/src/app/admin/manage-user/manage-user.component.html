@@ -1,0 +1,28 @@
+<div class="ion-page" id="main-content" style="z-index: 98;">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons style="z-index: 198;" class="menu-button" slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="title ">Manage Teacher</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+  
+        <table class="table">
+            
+            <tbody *ngFor="let teacher of userData">
+              <tr>
+                <td data-label="S.No">1</td>
+                <td data-label="Name">{{teacher.name}}</td>
+                <td data-label="Mobile">{{teacher.mobile}}</td>
+                <td data-label="Action">
+                    <button class="btn bg-success"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="btn bg-danger mx-2"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+  
+    </ion-content>
+  </div>

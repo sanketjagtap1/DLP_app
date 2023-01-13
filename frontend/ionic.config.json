@@ -1,0 +1,8 @@
+{
+  "name": "dlp",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,15 @@
+
+
+  <div class="registration container d-flex justify-content-center align-items-center w-100" >
+    <form #regiForm="ngForm" class="bg-light p-4" (ngSubmit)="registerUser(regiForm.value)">
+      <h3 class=" text-center ">Registration</h3>
+      <br>
+    <input class="form-control my-2" type="text" ngModel name="email" id="" placeholder="Email">  
+    <input class="form-control my-2" type="number" ngModel name="mobile" id="" placeholder="Mobile">  
+    <input class="form-control my-2" type="name" ngModel name="text" id="" placeholder="Name">
+    <input class="form-control my-2" type="password" ngModel name="password" id="" placeholder="Password">  
+    <input class="form-control my-2" type="password" ngModel name="confirmpass" id="" placeholder="Confirm Password">  
+    <button class="btn btn-primary text-uppercase w-100 my-4">Sing Up</button>
+    <span> Already have an account?<a routerLink="login">Sign In</a></span>
+  </form>
+</div>
