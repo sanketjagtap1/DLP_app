@@ -1,0 +1,30 @@
+<ion-content class="ion-padding ">
+    <ion-card *ngFor="let course of courseList">
+    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+    <ion-card-header>
+      <ion-card-title class="fs-6">{{course.courseName}}</ion-card-title>
+      <ion-card-subtitle>{{course.teacher}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      ₹ {{course.fees}} 
+    </ion-card-content>
+    <ion-button id="open-modal" (click)="getId(course.id,course.courseName,course.fees)" expand="block">Enroll</ion-button>
+  </ion-card>
+
+
+  <div *ngIf="courseName != ''">
+    <form #enrollForm="ngForm" (ngSubmit)="enrollCourse(enrollForm.value)" class="bg-light text-center p-5" style="height: 100vh; width: 100%; position: fixed; top: 1%; left: 1%;">
+       <h3>{{courseName}}</h3>
+      <input class="form-control my-2" type="text" ngModel="{{courseName}}"  name="courseName" id="">
+      <input class="form-control my-2" type="text" ngModel="{{courseId}}" name="courseId" id="" hidden>
+      <input class="form-control my-2" type="text" ngModel="{{id}}" name="studentId" id="" hidden>
+      <input class="form-control my-2" type="text" ngModel="{{fees}}" name="amount" id="">
+      <input class="form-control my-2" type="text" ngModel name="cardNo" id="" placeholder="Card No">
+      <br>
+      <button class="btn btn-primary">Enroll</button>
+    </form>
+  </div>
+  
+
+</ion-content>
+

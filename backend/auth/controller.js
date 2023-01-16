@@ -14,9 +14,12 @@ exports.validateUser = (req, res, next) => {
                     bcrypt.compare(req.body.password, resultData.password, function (err, result) {
                     // password is valid
                     console.log("password match")
+                    console.log(resultData)
                     res.status(200).json({
+                        id: resultData._id,
                         name: resultData.name,
                         email: resultData.email,
+                        mobile: resultData.mobile,
                         userType: resultData.userType
                     })
                 })

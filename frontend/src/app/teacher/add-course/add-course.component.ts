@@ -3,26 +3,21 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-add-teacher',
-  templateUrl: './add-teacher.component.html',
-  styleUrls: ['./add-teacher.component.scss'],
+  selector: 'app-add-course',
+  templateUrl: './add-course.component.html',
+  styleUrls: ['./add-course.component.scss'],
 })
-export class AddTeacherComponent implements OnInit {
+export class AddCourseComponent implements OnInit {
 
   constructor(private authSrv: AuthService,
     private router: Router) { }
 
   ngOnInit() {}
 
-  addTeacher(data:any){
-    console.log(data)
-    this.authSrv.registration(data).subscribe({
+  addCourse(courseData:any){
+    this.authSrv.addCourse(courseData).subscribe({
       next: (result) => {
         console.log(result)
-        console.log(result.newStudent.userType)
-        
-          this.router.navigate(['auth/login']);
-      
       },
       error: (error) => {
         console.log(error)

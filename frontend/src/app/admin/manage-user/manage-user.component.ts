@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-manage-user',
@@ -6,19 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-user.component.scss'],
 })
 export class ManageUserComponent implements OnInit {
-  userData:any;
-  constructor() { }
+  userData: any;
+  constructor(private authSrv: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
-    this.userData=[
-      {name: 'sanket', mobile: 8806328987},
-      {name: 'pratiksha', mobile: 1234567890},
-      {name: 'Akash', mobile: 9987654321},
-      {name: 'amit', mobile: 8806328987},
-      {name: 'Akanksha', mobile: 1111111111}
-    ]
+
+    // get teacher count
+
+    this.authSrv.getUserList().subscribe({
+      next: (result) => {
+        console.log(result.allStudents          )
+        this.userData = result.allStudents
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
   }
-
-  
-
 }

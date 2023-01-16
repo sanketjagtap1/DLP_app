@@ -1,7 +1,9 @@
 ion-toolbar{
     --background: #00031f;
 }
-
+.main{
+    min-height: 100vh;
+}
 .menu-button{
     color: #fff !important;
 }

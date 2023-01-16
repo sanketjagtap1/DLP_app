@@ -21,17 +21,22 @@ export class LoginComponent implements OnInit {
     console.log(data)
     this.authSrv.login(data).subscribe({
       next: (result) => {
-        console.log(result)
-        console.log(result.userType)
-        
 
-        if(result.userType == 'Admin'){
-          console.log('Inside if')
+        localStorage.setItem('userType', result.userType);
+        localStorage.setItem('id', result.id);
+        localStorage.setItem('email', result.email);
+        localStorage.setItem('mobile', result.mobile);
+
+
+
+
+        if (result.userType == 'Admin') {
           this.router.navigate(['/admin']);
-        }else{
-          console.log('This is not an admin')
+        } else if (result.userType == 'Student') {
+          this.router.navigate(['/student']);
+        } else if (result.userType == 'Teacher') {
+          this.router.navigate(['/teacher']);
         }
-
       },
       error: (error) => {
         console.log(error)

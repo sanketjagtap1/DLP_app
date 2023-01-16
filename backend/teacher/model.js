@@ -11,4 +11,13 @@ const courseSchema = new mongoose.Schema({
     createDate: String
 })
 
+const enroll = new mongoose.Schema({
+    _id: String,
+    courseId: String,
+    studentId: String,
+    amount: String,
+    cardNo: String,
+})
+
 module.exports = mongoose.model('Course', courseSchema)
+module.exports = mongoose.model('Enroll', enroll)

@@ -6,9 +6,17 @@
       <br>
     <input class="form-control my-2" type="text" ngModel name="email" id="" placeholder="Email">  
     <input class="form-control my-2" type="number" ngModel name="mobile" id="" placeholder="Mobile">  
-    <input class="form-control my-2" type="name" ngModel name="text" id="" placeholder="Name">
+    <input class="form-control my-2" type="name" ngModel name="name" id="" placeholder="Name">
+    <input class="form-control my-2" type="text"  ngModel="Student" name="userType" hidden id="">
+    
+    <select class="form-select" name="gender" ngModel id="">
+      <option value="">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+
     <input class="form-control my-2" type="password" ngModel name="password" id="" placeholder="Password">  
-    <input class="form-control my-2" type="password" ngModel name="confirmpass" id="" placeholder="Confirm Password">  
+    <input class="form-control my-2" type="password" id="" placeholder="Confirm Password">  
     <button class="btn btn-primary text-uppercase w-100 my-4">Sing Up</button>
     <span> Already have an account?<a routerLink="login">Sign In</a></span>
   </form>

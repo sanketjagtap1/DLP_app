@@ -1,0 +1,25 @@
+<div class="ion-page" id="main-content" style="z-index: 98;">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons style="z-index: 198;" class="menu-button" slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="title ">Manage Course</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+
+    <div class="registration container d-flex justify-content-center align-items-center w-100" >
+      <form #EditCourseForm="ngForm" class="bg-light p-4" (ngSubmit)="editCourse(EditCourseForm.value)">
+        
+        <input class="form-control my-2" type="text" ngModel name="courseName" id="" placeholder="Course Name">  
+        <input class="form-control my-2" type="date" ngModel name="startDate" id="" placeholder="Start Date">
+        <input class="form-control my-2" type="number" ngModel name="fees" id="" placeholder="Fees">  
+        <input class="form-control my-2" type="number" ngModel name="duration" id="" placeholder="Duration">
+        <button class="btn btn-primary text-uppercase w-100 my-2">Edit Course</button>
+        
+    </form>
+  </div>
+
+  </ion-content>
+</div>

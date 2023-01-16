@@ -1,27 +1,23 @@
-<div class="ion-page" id="main-content" style="z-index: 98;">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons style="z-index: 198;" class="menu-button" slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title class="title ">Add Teacher</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
 
-    <div class="registration container d-flex justify-content-center align-items-center w-100" >
-      <form #addTeacherForm="ngForm" class="bg-light p-4" (ngSubmit)="addTeacher(addTeacherForm.value)">
-        
-        <input class="form-control my-2" type="text" ngModel name="name" id="" placeholder="Name">  
-        <input class="form-control my-2" type="number" ngModel name="mobile" id="" placeholder="Mobile">
-        <input class="form-control my-2" type="email" ngModel name="email" id="" placeholder="Email">  
-        <input class="form-control my-2" type="text" ngModel name="qualification" id="" placeholder="Qualification">
-        <input class="form-control my-2" type="text"  ngModel name="userType" value="John" id="" hidden>
-        <input class="form-control my-2" type="password" ngModel name="password" id="" placeholder="Password">  
-        <button class="btn btn-primary text-uppercase w-100 my-2">Create Account</button>
-        
-    </form>
-  </div>
 
-  </ion-content>
+
+
+<div class="registration container d-flex justify-content-center align-items-center w-100" >
+  <form #addTeacherForm="ngForm" class="bg-light p-4" (ngSubmit)="addTeacher(addTeacherForm.value)">
+    <h5 class="text-center">Add Teacher</h5>
+  <input class="form-control my-2" type="text" ngModel name="email" id="" placeholder="Email">  
+  <input class="form-control my-2" type="number" ngModel name="mobile" id="" placeholder="Mobile">  
+  <input class="form-control my-2" type="name" ngModel name="name" id="" placeholder="Name">
+  <input class="form-control my-2" type="text"  ngModel="Teacher" name="userType" hidden id="">
+  
+  <select class="form-select" name="gender" ngModel id="">
+    <option value="">Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+
+  <input class="form-control my-2" type="password" ngModel name="password" id="" placeholder="Password">  
+  <input class="form-control my-2" type="password" id="" placeholder="Confirm Password">  
+  <button class="btn btn-primary text-uppercase w-100">Submit</button>
+</form>
 </div>
