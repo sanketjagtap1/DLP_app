@@ -1,6 +1,6 @@
 const express = require('express');
 const User = require('../auth/model')
-const Course = require('../teacher/model')
+const {Course} = require('../teacher/model')
 const mongoose = require('mongoose')
 const { uuid } = require('uuidv4');
 const bcrypt = require("bcrypt")
@@ -20,7 +20,7 @@ exports.getUserList = (req, res, next) => {
 };
 
 exports.getCourseList = (req, res, next) => {
-    Course.find({ $or: [{ userType: 'Student' }, { userType: 'Teacher' }] })
+    Course.find()
         .then(result => {
             console.log(result)
             res.status(200).json({
@@ -59,7 +59,7 @@ exports.getStudentCount = (req, res, next) => {
 };
 
 exports.getCourseCount = (req, res, next) => {
-    Course.count({ userType: 'Student'})
+    Course.count()
         .then(result => {
             console.log(result)
             res.status(200).json({

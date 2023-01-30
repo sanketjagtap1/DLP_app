@@ -4,6 +4,8 @@ const router = express.Router();
 const teacherController = require('./controller.js')
 
 router.post('/createCourse', teacherController.createCourse);
-router.post('/enrollCourse', teacherController.enrollCourse);
+router.post('/addLecture', teacherController.addLecture);
+router.post('/updateLecture', teacherController.updateLecture);
+
 
 module.exports = router;

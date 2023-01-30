@@ -14,12 +14,14 @@ export class DashboardComponent implements OnInit {
   teacherCount: any;
   studentCount: any;
   courseCount: any;
+  userType:any;
 
   constructor(private authSrv: AuthService,
     private router: Router) { }
 
   ngOnInit() {
-
+    
+    this.userType=localStorage.getItem('userType')
     console.log(localStorage.getItem('userType'));
     console.log(localStorage.getItem('id'));
     console.log(localStorage.getItem('email'));

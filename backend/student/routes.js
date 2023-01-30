@@ -6,5 +6,16 @@ const studentController = require('./controller')
 // create Account
 router.post('/register', studentController.createStudent);
 
+// enroll Course
+router.post('/enrollCourse', studentController.enrollCourse);
+
+// get lecture using student id
+router.get('/getLectureList', studentController.getLectureList)
+
+// get lecture using student id
+router.post('/joinLect', studentController.joinLect)
+
+// get lecture using student id
+router.get('/lectJoinHistory', studentController.lectJoinHistory)
 
 module.exports = router;

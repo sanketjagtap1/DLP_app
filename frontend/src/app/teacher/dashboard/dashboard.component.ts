@@ -9,12 +9,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class DashboardComponent implements OnInit {
   courseCount:any;
+  userType:any;
   lectCount:any;
   constructor(private authSrv: AuthService,
     private router: Router) { }
 
   ngOnInit() {
     // get teacher count
+    this.userType=localStorage.getItem('userType');
       this.authSrv.getCourseCount().subscribe({
         next: (result) => {
           console.log(result)

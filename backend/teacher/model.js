@@ -10,14 +10,19 @@ const courseSchema = new mongoose.Schema({
     createBy: String,
     createDate: String
 })
+const Course=  mongoose.model("Course", courseSchema);
 
-const enroll = new mongoose.Schema({
+const lectureSchema = new mongoose.Schema({
     _id: String,
     courseId: String,
-    studentId: String,
-    amount: String,
-    cardNo: String,
+    lectDate: String,
+    startTime: String,
+    createDate: String
 })
 
-module.exports = mongoose.model('Course', courseSchema)
-module.exports = mongoose.model('Enroll', enroll)
+const Lecture=  mongoose.model("Lecture", lectureSchema);
+
+module.exports = {
+    Course: Course,
+    Lecture: Lecture
+  }

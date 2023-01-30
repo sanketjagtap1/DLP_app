@@ -9,13 +9,17 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  userType:any;
 
   constructor(
     private authSrv: AuthService,
     private router: Router
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    
+    this.userType=localStorage.getItem('userType');
+   }
 
   login(data: any) {
     console.log(data)

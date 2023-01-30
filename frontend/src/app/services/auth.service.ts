@@ -8,7 +8,7 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class AuthService {
 
-  base_url = 'http://localhost:3000/';
+  base_url = 'http://192.168.0.104:3000/';
 
   constructor(private http: HttpClient) { }
 

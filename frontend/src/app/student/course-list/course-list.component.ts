@@ -21,7 +21,6 @@ export class CourseListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
     this.userType=localStorage.getItem('userType');
     this.id=localStorage.getItem('id');
     this.email=localStorage.getItem('email');
