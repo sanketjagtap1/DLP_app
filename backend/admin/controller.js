@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt")
 
 
 exports.getUserList = (req, res, next) => {
-    User.find({ $or: [{ userType: 'Student' }, { userType: 'Teacher' }] })
+    User.find( { userType: 'Teacher' })
         .then(result => {
             console.log(result)
             res.status(200).json({

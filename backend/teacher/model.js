@@ -7,7 +7,6 @@ const courseSchema = new mongoose.Schema({
     startData: String,
     fees: Number,
     duration: Number,
-    createBy: String,
     createDate: String
 })
 const Course=  mongoose.model("Course", courseSchema);

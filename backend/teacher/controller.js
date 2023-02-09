@@ -7,6 +7,23 @@ const bcrypt = require("bcrypt")
 const nodemailer = require("nodemailer");
 
 
+exports.getCourseCount = (req, res, next)=>{
+    console.log(req.body)
+    Course.count({'_id': req.body.id})
+    .then(result => {
+        // console.log(result)
+        res.status(200).json({
+            courseCount: result,
+            message: "Success"
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({ error: ' Failed' });
+    })
+    
+}
+
 exports.createCourse = (req, res, next) => {
 
     console.log(req.body)
@@ -18,7 +35,6 @@ exports.createCourse = (req, res, next) => {
         startData: req.body.startData,
         fees: req.body.fees,
         duration: req.body.duration,
-        createBy: req.body.createBy,
         createDate: new Date()
     })
 

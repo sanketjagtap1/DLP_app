@@ -38,7 +38,7 @@ exports.createStudent = (req, res, next) => {
                                     .then(result => {
                                         console.log(result);
                                         res.status(200).json({
-                                            newStudent: result
+                                            message: "success"
                                         })
                                     })
                                     // catching error while creating student
