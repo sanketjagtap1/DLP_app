@@ -7,6 +7,45 @@ const bcrypt = require("bcrypt")
 const nodemailer = require("nodemailer");
 
 
+exports.getLect = (req, res, next)=>{
+    console.log(req.body.id)
+    Course.find({'teacherId': req.body.id})
+    .then(result => {
+        // console.log(result)
+
+        result.map(element=>{
+            console.log("map data",element)
+        })
+
+        res.status(200).json({
+            courseList: result,
+            message: "Success"
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({ error: ' Failed' });
+    })
+    
+}
+
+exports.getCourses = (req, res, next)=>{
+    console.log(req.body.id)
+    Course.find({'teacherId': req.body.id})
+    .then(result => {
+        console.log(result)
+        res.status(200).json({
+            courseList: result,
+            message: "Success"
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({ error: ' Failed' });
+    })
+    
+}
+
 exports.getCourseCount = (req, res, next)=>{
     console.log(req.body)
     Course.count({'_id': req.body.id})
@@ -30,9 +69,9 @@ exports.createCourse = (req, res, next) => {
 
     const course = new Course({
         _id: uuid(),
-        courseName: req.body.courseName,
+        courseName: req.body.name,
         teacherId: req.body.teacherId,
-        startData: req.body.startData,
+        startData: req.body.startDate,
         fees: req.body.fees,
         duration: req.body.duration,
         createDate: new Date()

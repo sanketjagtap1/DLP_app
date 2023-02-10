@@ -10,7 +10,7 @@ router.post('/register', studentController.createStudent);
 router.post('/enrollCourse', studentController.enrollCourse);
 
 // get lecture using student id
-router.get('/getLectureList', studentController.getLectureList)
+router.post('/getLectureList', studentController.getLectureList)
 
 // get lecture using student id
 router.post('/joinLect', studentController.joinLect)
