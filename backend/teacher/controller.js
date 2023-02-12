@@ -1,15 +1,15 @@
-const express = require('express');
+require('express');
 const { Course, Lecture } = require('./model')
 const { Enroll } = require('../student/model')
-const mongoose = require('mongoose')
+require('mongoose');
 const { uuid } = require('uuidv4');
-const bcrypt = require("bcrypt")
+require("bcrypt");
 const nodemailer = require("nodemailer");
 
 
 exports.getLect = (req, res, next)=>{
     console.log(req.body.id)
-    Course.find({'teacherId': req.body.id})
+    Lecture.find({'teacherId': req.body.id})
     .then(result => {
         // console.log(result)
 
@@ -43,12 +43,64 @@ exports.getCourses = (req, res, next)=>{
         console.log(err)
         res.status(500).json({ error: ' Failed' });
     })
-    
+
+}
+
+
+exports.getCourses = (req, res, next)=>{
+    console.log(req.body.id)
+    Course.find({'teacherId': req.body.id})
+        .then(result => {
+            console.log(result)
+            res.status(200).json({
+                courseList: result,
+                message: "Success"
+            })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ error: ' Failed' });
+        })
+
+}
+
+
+exports.getCourseEnrollDetails = (req, res, next)=>{
+    console.log(req.body.id)
+
+    Enroll.aggregate([
+        {
+            $match: {
+                courseId: req.body.id
+            }
+        },
+        {
+            $lookup: {
+                from: "users", // collection name in db
+
+                localField: "studentId",
+                foreignField: "_id",
+                as: "student"
+            }
+        }]).exec(function (err, result) {
+        // console.log(result)
+        result.map(element => {
+
+            console.log('Course-------->', element)
+            // console.log('Lectures----------->',element.lectures)
+        })
+        res.status(200).json({
+            allCourses: result,
+            message: "Success"
+        })
+        // students contain WorksnapsTimeEntries
+    });
+
 }
 
 exports.getCourseCount = (req, res, next)=>{
     console.log(req.body)
-    Course.count({'_id': req.body.id})
+    Course.count({'teacherId': req.body.id})
     .then(result => {
         // console.log(result)
         res.status(200).json({
@@ -61,6 +113,22 @@ exports.getCourseCount = (req, res, next)=>{
         res.status(500).json({ error: ' Failed' });
     })
     
+}
+exports.getLectCount = (req, res, next)=>{
+    console.log(req.body)
+    Lecture.count({'teacherId': req.body.id})
+    .then(result => {
+        // console.log(result)
+        res.status(200).json({
+            lectCount: result,
+            message: "Success"
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({ error: ' Failed' });
+    })
+
 }
 
 exports.createCourse = (req, res, next) => {
@@ -94,12 +162,27 @@ exports.createCourse = (req, res, next) => {
 
 };
 
+exports.deleteCourse = (req, res, next) =>{
+    Course.deleteOne({'_id': req.body.id})
+        .then(result => {
+        console.log(result)
+        return res.status(200).json({
+           message: "Course Deleted Successfully"
+        });
+    })
+        .catch(err=>{
+            console.log(err)
+            return res.status(500).json({ error: ' Failed' });
+        })
+}
 
 exports.addLecture = (req, res, next) => {
     // console.log(req.body)
     const lect = new Lecture({
         _id: uuid(),
         courseId: req.body.courseId,
+        teacherId: req.body.teacherId,
+        title: req.body.title,
         lectDate: req.body.lectDate,
         startTime: req.body.startTime,
         createDate: new Date()

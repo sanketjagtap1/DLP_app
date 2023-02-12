@@ -6,6 +6,8 @@ const studentController = require('./controller')
 // create Account
 router.post('/register', studentController.createStudent);
 
+router.post('/deleteTeacher', studentController.deleteTeacher)
+
 // enroll Course
 router.post('/enrollCourse', studentController.enrollCourse);
 

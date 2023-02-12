@@ -3,7 +3,7 @@ const User = require('../auth/model')
 const { Enroll } = require('./model')
 const { JoinLect } = require('./model')
 const { Lecture } = require('../teacher/model')
-const Course = require('../teacher/model')
+const {Course} = require('../teacher/model')
 const mongoose = require('mongoose')
 const { uuid } = require('uuidv4');
 const bcrypt = require("bcrypt")
@@ -44,14 +44,14 @@ exports.createStudent = (req, res, next) => {
                                     // catching error while creating student
                                     .catch(err => {
                                         console.log(err)
-                                        res.status(500).json({ error: 'User Registration Failed' });
+                                        res.status(200).json({ message: 'User Registration Failed' });
                                     })
                             } else {
-                                res.status(500).json({ error: 'Mobile No Already Exists' });
+                                res.status(200).json({ message: 'Mobile No Already Exists' });
                             }
                         })
                 } else {
-                    res.status(500).json({ error: 'Email Already Exists' });
+                    res.status(200).json({ message: 'Email Already Exists' });
                 }
             })
         // store hash in the database
@@ -59,6 +59,20 @@ exports.createStudent = (req, res, next) => {
 
 
 };
+
+exports.deleteTeacher= (req, res, next)=>{
+    User.deleteOne({"_id": req.body.id})
+        .then(result=>{
+
+                res.status(200).json({
+                enroll: result,
+                message: "User Deleted Successfully"
+            })
+        }).catch(err => {
+        console.log(err)
+        res.status(500).json({ error: 'Something went wrong' });
+    })
+}
 
 
 exports.enrollCourse = (req, res, next) => {
@@ -113,20 +127,45 @@ exports.getLectureList = (req, res, next) => {
 
             console.log("course that student enroll---->", courseData)
 
-            Lecture.find({ courseId: courseData })
-                .then((result) => {
-                    console.log("Lecture for student------>", result)
+            Lecture.aggregate([
+                {
+                    $match: {
+                        courseId:
+                        {
+                            $in: courseData
+                        }
+                    }
+                },
+                {
+                    $lookup: {
+                        from: "courses", // collection name in db
+                        pipeline: [
+                            {
+                                $match: {
+                                    _id: {
+                                        $in: courseData
+                                    }
+                                }
+                            }
+                        ],
+                        localField: "courseId",
+                        foreignField: "_id",
+                        as: "Course"
+                    }
+                }]).exec(function (err, result) {
+                    // console.log(result)
+                    result.map(element => {
+        
+                        console.log('Course-------->', element)
+                        // console.log('Lectures----------->',element.lectures)
+                    })
                     res.status(200).json({
-                        lectData: result,
+                        allCourses: result,
                         message: "Success"
                     })
-
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-
-
+                    // students contain WorksnapsTimeEntries
+                });
+            
         })
         .catch((err) => {
             console.log(err)
@@ -144,27 +183,27 @@ exports.joinLect = (req, res, next) => {
     })
 
     joinLect.save()
-    .then((result)=>{
-        console.log(result)
-        res.status(200).json({
-            message: "Success"
+        .then((result) => {
+            console.log(result)
+            res.status(200).json({
+                message: "Success"
+            })
         })
-    })
-    .catch((err)=>{
-        res.status(500).json({ error: 'Lecture Not Existes' });
-    })
+        .catch((err) => {
+            res.status(500).json({ error: 'Lecture Not Existes' });
+        })
 }
 
 // lect Join History
-exports.lectJoinHistory=(req, res, next)=>{
-    JoinLect.find({studentId: req.body.studentId})
-    .then((result)=>{
-        console.log(result)
-        res.status(200).json({
-            lectJoinData: result,
+exports.lectJoinHistory = (req, res, next) => {
+    JoinLect.find({ studentId: req.body.studentId })
+        .then((result) => {
+            console.log(result)
+            res.status(200).json({
+                lectJoinData: result,
+            })
         })
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
+        .catch((err) => {
+            console.log(err)
+        })
 }

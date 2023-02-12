@@ -1,13 +1,13 @@
 const express = require('express');
 const User = require('../auth/model')
-const {Course} = require('../teacher/model')
+const { Course, Lecture } = require('../teacher/model')
 const mongoose = require('mongoose')
 const { uuid } = require('uuidv4');
 const bcrypt = require("bcrypt")
 
 
 exports.getUserList = (req, res, next) => {
-    User.find( { userType: 'Teacher' })
+    User.find({ userType: 'Teacher' })
         .then(result => {
             console.log(result)
             res.status(200).json({
@@ -20,16 +20,39 @@ exports.getUserList = (req, res, next) => {
 };
 
 exports.getCourseList = (req, res, next) => {
-    Course.find()
-        .then(result => {
-            console.log(result)
+
+    Course.aggregate([
+               {
+            $lookup: {
+                from: "users", // collection name in db
+                localField: "teacherId",
+                foreignField: "_id",
+                as: "teacher"
+            }
+        }]).exec(function (err, result) {
+            // console.log(result)
+            result.map(element => {
+
+                console.log('Course-------->', element)
+                // console.log('Lectures----------->',element.lectures)
+            })
             res.status(200).json({
                 allCourses: result,
                 message: "Success"
             })
-        }).catch(err => {
-            console.log(err)
-        })
+            // students contain WorksnapsTimeEntries
+        });
+
+    //  Course.find()
+    // .then(result => {
+    //     console.log(result)
+    //     res.status(200).json({
+    //         allCourses: result,
+    //         message: "Success"
+    //     })
+    // }).catch(err => {
+    //     console.log(err)
+    // })
 };
 
 exports.getTeacherCount = (req, res, next) => {
@@ -46,7 +69,7 @@ exports.getTeacherCount = (req, res, next) => {
 };
 
 exports.getStudentCount = (req, res, next) => {
-    User.count({ userType: 'Student'})
+    User.count({ userType: 'Student' })
         .then(result => {
             console.log(result)
             res.status(200).json({

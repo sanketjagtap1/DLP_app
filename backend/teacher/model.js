@@ -14,6 +14,8 @@ const Course=  mongoose.model("Course", courseSchema);
 const lectureSchema = new mongoose.Schema({
     _id: String,
     courseId: String,
+    teacherId: String,
+    title: String,
     lectDate: String,
     startTime: String,
     createDate: String
